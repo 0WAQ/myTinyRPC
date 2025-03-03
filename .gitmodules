@@ -1,6 +1,3 @@
 [submodule "third-party/myTinyMuduo"]
 	path = third-party/myTinyMuduo
 	url = https://github.com/0WAQ/myTinyMuduo
-[submodule "third-party/protobuf"]
-	path = third-party/protobuf
-	url = https://github.com/protocolbuffers/protobuf
