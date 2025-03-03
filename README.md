@@ -1,1 +1,1 @@
-# myTinyRPC: 一个基于ProtoBuffer和myTinyMuduo的RPC框架
+# myTinyRPC: 一个基于Protobuf和myTinyMuduo实现的RPC框架
