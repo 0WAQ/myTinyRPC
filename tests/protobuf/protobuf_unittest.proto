@@ -1,0 +1,50 @@
+syntax = "proto3";  // 声明protobuf版本
+
+package protobuf_unittest;
+
+// 定义选项; 表示生成service服务类和rpc方法描述
+option cc_generic_services = true;
+
+// 响应结果
+message ResultCode {
+    int32 errcode = 1;
+    bytes message = 2;
+}
+
+// 登录请求类型
+message LoginRequest {
+    bytes name = 1;
+    bytes pwd = 2;
+}
+
+// 登录相应类型
+message LoginResponse {
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+// 用户信息
+message User {
+    bytes name = 1;
+    uint32 age = 2;
+    enum Sex {
+        MALE = 0;
+        FEMALE = 1;
+    };
+    Sex sex = 3;
+}
+
+message GetFriendListsRequst {
+    uint32 userid = 1;
+}
+
+message GetFriendListsResponse {
+    ResultCode result = 1;
+    repeated User friend_list = 2;  // 列表类型
+}
+
+// 定义prc方法的类型(只是一个描述)
+service UserServiceRpc {
+    rpc login (LoginRequest) returns (LoginResponse);
+    rpc getFriendLists(GetFriendListsRequst) returns(GetFriendListsResponse);
+}
