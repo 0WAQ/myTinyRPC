@@ -2,6 +2,8 @@
 
 #include <noncopyable.h>
 
+#include "RpcConfig.h"
+
 namespace myrpc
 {
 
@@ -22,7 +24,14 @@ public:
      */
     static void init(int argc, char* argv[]);
 
+    /**
+     * @brief 获取配置信息
+     */
+    static RpcConfig& config();
+
 private:
+
+    static RpcConfig _M_config;
 
 };
 

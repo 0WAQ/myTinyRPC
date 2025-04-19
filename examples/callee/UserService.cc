@@ -59,11 +59,13 @@ public:
 
 int main(int argc, char *argv[])
 {
-    Logger* log = Logger::get_instance("../log", "examples");
+    Logger* log = Logger::get_instance("log/", "UserService-examples");
     log->init(Logger::DEBUG);
 
     // 初始化框架
     RpcApplication::init(argc, argv);
+
+    LOG_INFO("INIT");
 
     // 发布服务
     RpcProvider provider;
