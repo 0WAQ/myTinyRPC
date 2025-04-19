@@ -1,6 +1,8 @@
 #pragma once
 
 #include <memory>
+#include <functional>
+#include <unordered_map>
 
 #include <TcpServer.h>
 #include <TcpConnection.h>
@@ -9,7 +11,8 @@
 #include <Buffer.h>
 #include <TimeStamp.h>
 
-#include "google/protobuf/service.h"
+#include <google/protobuf/service.h>
+#include <google/protobuf/descriptor.h>
 
 namespace myrpc
 {
@@ -45,6 +48,19 @@ private:
 
     mymuduo::EventLoop _M_loop;
 
+    // 服务信息
+    struct ServiceInfo {
+        // 服务的对象地址
+        google::protobuf::Service *service;
+        
+        // 保存服务的所有方法
+        std::unordered_map<std::string,
+                            const google::protobuf::MethodDescriptor*>
+            method_map;
+    };
+
+    // 注册成功的服务信息表
+    std::unordered_map<std::string, ServiceInfo> _M_service_map;
 };
 
 } // namespace myrpc

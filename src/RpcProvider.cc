@@ -5,9 +5,30 @@
 namespace myrpc
 {
 
+namespace gp = google::protobuf;
+
 void RpcProvider::notify_service(gp::Service *service)
 {
+    // 服务信息
+    ServiceInfo info;
+    info.service = service;
 
+    // 获取服务对象的描述
+    const gp::ServiceDescriptor *service_desc = service->GetDescriptor();
+    
+    // 服务的名称与方法数
+    std::string name = service_desc->name();
+    int method_cnt = service_desc->method_count();
+
+    // 遍历获取所有方法描述
+    for(int i = 0; i < method_cnt; ++i) {
+        const gp::MethodDescriptor *method_desc = service_desc->method(i);
+        std::string method_name = method_desc->name();
+
+        info.method_map.insert({name, method_desc});
+    }
+
+    _M_service_map.insert({name, info});
 }
 
 void RpcProvider::run()

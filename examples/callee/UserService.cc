@@ -30,7 +30,7 @@ public:
     }
 
     /**
-     * @brief callee
+     * @brief 重写protobuf提供的虚函数
      * 
      * 1. caller ==> UserServiceRpc_Stub::login(LoginRequest) ==> mymuduo ==> callee
      * 2. callee ==> UserServiceRpc_Stub::login(LoginRequest) ==> UserService::login
