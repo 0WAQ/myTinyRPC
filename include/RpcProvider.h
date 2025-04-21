@@ -38,11 +38,23 @@ public:
 
 private:
 
+    /**
+     * @brief 连接到达
+     */
     void on_connection(const mymuduo::TcpConnectionPtr& conn);
 
+    /**
+     * @brief rpc请求
+     */
     void on_message(const mymuduo::TcpConnectionPtr& conn,
                     mymuduo::Buffer* buffer,
                     mymuduo::TimeStamp timestamp);
+
+    /**
+     * @brief Closure回调操作, 用于序列化rpc的响应和网络发送
+     */
+    void send_rpc_response(const mymuduo::TcpConnectionPtr& conn,
+                    gp::Message*);
 
 private:
 
