@@ -1,6 +1,6 @@
 project(provider)
 
-set(SRC_LIST UserService.cc ../user.pb.cc)
+set(SRC_LIST CalleeUserService.cc ../user.pb.cc)
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 

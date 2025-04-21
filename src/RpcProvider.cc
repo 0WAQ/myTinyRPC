@@ -28,7 +28,7 @@ void RpcProvider::notify_service(gp::Service *service)
         const gp::MethodDescriptor *method_desc = service_desc->method(i);
         std::string method_name = method_desc->name();
 
-        info.method_map.insert({name, method_desc});
+        info.method_map.insert({method_name, method_desc});
     }
 
     _M_service_map.insert({name, info});
@@ -57,7 +57,7 @@ void RpcProvider::run()
 
 void RpcProvider::on_connection(const mymuduo::TcpConnectionPtr& conn)
 {
-    // 若连接已建立, 则此次为连接断开, 关闭连接
+    // 若连接已断开, 那么生产者也断开连接, 释放资源
     if(!conn->connected()) {
         conn->shutdown();
     }

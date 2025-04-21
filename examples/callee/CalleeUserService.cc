@@ -25,12 +25,12 @@ public:
      * @brief login的业务逻辑
      */
     bool login(std::string name, std::string pwd) {
-        printf("doing local service: login\nname: %s, pwd: %s", name.c_str(), pwd.c_str());
-        return true;
+        printf("doing local service: login\nname: %s, pwd: %s\n", name.c_str(), pwd.c_str());
+        return false;
     }
 
     /**
-     * @brief 重写protobuf提供的虚函数
+     * @brief 重写protobuf提供的虚函数, 真是注册在服务中的方法
      * 
      * 1. caller ==> UserServiceRpc_Stub::login(LoginRequest) ==> mymuduo ==> callee
      * 2. callee ==> UserServiceRpc_Stub::login(LoginRequest) ==> UserService::login
@@ -48,11 +48,11 @@ public:
     
         // 将响应写入response
         ResultCode *rc = res->mutable_result();
-        rc->set_errcode(0);
-        rc->set_errmsg("");
+        rc->set_errcode(1);
+        rc->set_errmsg("errmsg");
         res->set_success(result);
     
-        // 执行回调, 执行响应对象的序列化和发送, 由框架提供
+        // 返回框架, 执行回调, 用于响应对象的序列化和发送
         done->Run();
     }
 };
